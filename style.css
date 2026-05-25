@@ -5,3 +5,31 @@
   background-color: #422ad5;
   color: white;
 }
+.priority-high {
+  background-color: #fee2e2;
+  color: #ef4444;
+}
+
+.priority-medium {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.priority-low {
+  background-color: #f3f4f6;
+  color: #6b7280;
+}
+.label-bug {
+  background-color: #fee2e2;
+  color: #ef4444;
+}
+
+.label-help-wanted {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.label-enhancement {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
