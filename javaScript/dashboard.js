@@ -1,6 +1,7 @@
 const allBtn = document.getElementById("allBtn");
 const openBtn = document.getElementById("openBtn");
 const closedBtn = document.getElementById("closedBtn");
+const searchInput = document.getElementById("searchInput");
 const manageSpinner = (status) => {
   const spinner = document.getElementById("spinner");
   const cardContainer = document.getElementById("cardContainer");
@@ -68,7 +69,7 @@ const showIssues = (issues) => {
       .join("");
 
     issueCard.innerHTML = `
-      <div class="bg-white border border-[#E9E9E9] border-t-4 ${statusBorder} rounded-lg shadow-sm p-4">
+      <div onclick="loadIssueDetails('${issue.id}')" class="bg-white border border-[#E9E9E9] border-t-4 ${statusBorder} rounded-lg shadow-sm p-4">
 
         <!-- Top -->
         <div class="flex items-center justify-between mb-4">
@@ -96,6 +97,86 @@ const showIssues = (issues) => {
     cardContainer.append(issueCard);
   });
 };
+
+const loadIssueDetails = (id) => {
+  fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      showIssueModal(data.data);
+    });
+};
+
+const showIssueModal = (issue) => {
+  const modalContent = document.getElementById("modalContent");
+
+  modalContent.innerHTML = `
+    <h2 class="text-2xl font-bold mb-3">
+      ${issue.title}
+    </h2>
+
+    <div class="flex items-center gap-3 mb-4">
+      <span class="badge ${
+        issue.status.toLowerCase() === "open"
+          ? "badge-success"
+          : "badge-primary"
+      }">
+        ${issue.status}
+      </span>
+
+      <p class="text-sm text-gray-500">
+        Opened by ${issue.author}
+      </p>
+
+      <p class="text-sm text-gray-500">
+        ${new Date(issue.createdAt).toLocaleDateString()}
+      </p>
+    </div>
+
+    <p class="text-gray-600 mb-6">
+      ${issue.description}
+    </p>
+
+    <div class="grid grid-cols-2 gap-4 bg-base-200 rounded-lg p-4">
+      <div>
+        <p class="text-sm text-gray-500">Assignee:</p>
+        <h3 class="font-semibold">${issue.assignee}</h3>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-500">Priority:</p>
+        <span class="badge priority-${issue.priority.toLowerCase()} border-none text-xs uppercase">
+          ${issue.priority}
+        </span>
+      </div>
+    </div>
+  `;
+
+  document.getElementById("issueDetailsModal").showModal();
+};
+
+const searchIssues = (searchText) => {
+  manageSpinner(true);
+
+  fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`,
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      showIssues(data.data);
+      manageSpinner(false);
+    });
+};
+searchInput.addEventListener("keyup", () => {
+  const searchText = searchInput.value.trim();
+
+  if (searchText === "") {
+    showIssues(allIssues);
+    return;
+  }
+
+  searchIssues(searchText);
+});
+
 allBtn.addEventListener("click", () => {
   removeActive();
   allBtn.classList.add("active");
