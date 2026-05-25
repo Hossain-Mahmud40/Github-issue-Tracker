@@ -4,6 +4,85 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GithubIssueTracker</title>
+    <link
+      rel="shortcut icon"
+      href="./assets/github-logo.png"
+      type="image/x-icon"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Font Integration -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind plus DaisyUI -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./style.css" />
   </head>
-  <body></body>
+  <body>
+    <div
+      class="login container mx-auto flex items-center justify-center h-screen"
+    >
+      <fieldset
+        class="fieldset bg-base-100 border-base-300 rounded-box w-full max-w-md border p-6 shadow-md"
+      >
+        <!-- Header -->
+        <div class="text-center mb-4">
+          <img src="./assets/github-logo.png" class="w-20 h-20 mx-auto mb-3" />
+
+          <h1 class="text-xl font-bold">GitHub Issues Tracker</h1>
+
+          <p class="text-sm text-gray-500">Sign in to manage your issues</p>
+        </div>
+
+        <!-- Username -->
+        <label class="label">Username</label>
+        <input type="text" class="input w-full" placeholder="Enter Username" />
+
+        <p class="text-xs text-primary">Default: admin</p>
+
+        <!-- Password -->
+        <label class="label">Password</label>
+        <input
+          type="password"
+          class="input w-full"
+          placeholder="Enter Password"
+        />
+
+        <p class="text-xs text-primary">Default: admin123</p>
+
+        <!-- Button -->
+        <button class="btn btn-primary mt-4 w-full">Sign In</button>
+
+        <!-- Divider -->
+        <div class="divider text-sm">OR</div>
+
+        <!-- Demo Box -->
+        <div class="text-center">
+          <p class="text-xs text-gray-500 mb-2">Demo Credentials:</p>
+
+          <div class="bg-base-300 rounded-lg p-4 text-sm">
+            <p><span class="font-bold">Username:</span> admin</p>
+            <p><span class="font-bold">Password:</span> admin123</p>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </body>
 </html>
