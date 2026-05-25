@@ -2,6 +2,14 @@ const allBtn = document.getElementById("allBtn");
 const openBtn = document.getElementById("openBtn");
 const closedBtn = document.getElementById("closedBtn");
 const searchInput = document.getElementById("searchInput");
+const issueCountText = document.getElementById("issueCountText");
+
+const setIssueCount = (count) => {
+  if (!issueCountText) return;
+  const issueLabel = count === 1 ? "Issue" : "Issues";
+  issueCountText.textContent = `${count} ${issueLabel}`;
+};
+
 const manageSpinner = (status) => {
   const spinner = document.getElementById("spinner");
   const cardContainer = document.getElementById("cardContainer");
@@ -40,6 +48,8 @@ const showIssues = (issues) => {
   const cardContainer = document.getElementById("cardContainer");
 
   cardContainer.innerHTML = "";
+
+  setIssueCount(Array.isArray(issues) ? issues.length : 0);
 
   issues.forEach((issue) => {
     const issueCard = document.createElement("div");
@@ -171,6 +181,7 @@ searchInput.addEventListener("keyup", () => {
 
   if (searchText === "") {
     showIssues(allIssues);
+    manageSpinner(false);
     return;
   }
 
